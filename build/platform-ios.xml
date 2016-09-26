@@ -1,7 +1,7 @@
-<platform xmlns="http://ns.adobe.com/air/extension/18.0">
+<platform xmlns="http://ns.adobe.com/air/extension/23.0">
     <sdkVersion>7.0</sdkVersion>
     <linkerOptions>
-        <option>-weak_framework Accounts</option> 
+        <option>-weak_framework Accounts</option>
         <option>-weak_framework AdSupport</option>
         <option>-weak_framework Social</option>
         <option>-weak_framework CoreMotion</option>
@@ -9,7 +9,6 @@
     </linkerOptions>
     <packagedDependencies>
         <packagedDependency>Bolts.framework</packagedDependency>
-        <packagedDependency>FBAudienceNetwork.framework</packagedDependency>
         <packagedDependency>FBSDKCoreKit.framework</packagedDependency>
         <packagedDependency>FBSDKLoginKit.framework</packagedDependency>
         <packagedDependency>FBSDKShareKit.framework</packagedDependency>

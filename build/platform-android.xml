@@ -1,15 +1,18 @@
-<platform xmlns="http://ns.adobe.com/air/extension/18.0">
+<platform xmlns="http://ns.adobe.com/air/extension/23.0">
     <packagedDependencies>
         <packagedDependency>bolts-android-1.2.0.jar</packagedDependency>
         <packagedDependency>facebook-android-sdk-4.15.0.jar</packagedDependency>
         <packagedDependency>annotations.jar</packagedDependency>
-        <packagedDependency>android-support-v4.jar</packagedDependency>
         <packagedDependency>cardview-v7-lib.jar</packagedDependency>
     </packagedDependencies>
     <packagedResources>
         <packagedResource>
             <packageName>com.facebook</packageName>
             <folderName>facebook-res</folderName>
+        </packagedResource>
+        <packagedResource>
+            <packageName>android.support.v7.cardview</packageName>
+            <folderName>cardview-res</folderName>
         </packagedResource>
     </packagedResources>
 </platform>

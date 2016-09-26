@@ -6,7 +6,6 @@ import com.freshplanet.ane.AirFacebook.share.FBShareLinkContent;
 import com.freshplanet.ane.AirFacebook.share.FBShareOpenGraphContent;
 
 import flash.desktop.InvokeEventReason;
-
 import flash.desktop.NativeApplication;
 import flash.events.Event;
 import flash.events.EventDispatcher;
@@ -17,7 +16,7 @@ import flash.system.Capabilities;
 
 public class Facebook extends EventDispatcher {
 
-    public static const VERSION:String = "4.6.1";
+    public static const VERSION:String = "4.15.0";//android 4.15.0, ios 4.15.1
 
     private var _initialized:Boolean;
 
@@ -525,6 +524,7 @@ public class Facebook extends EventDispatcher {
         var callback:Function;
         var status:String;
 
+		as3Log(JSON.stringify(event), "AS3.onStatus");
         if (event.code.indexOf("SESSION") != -1) // If the event code contains SESSION, it's an open/reauthorize session result
         {
             var success:Boolean = (event.code.indexOf("SUCCESS") != -1);
