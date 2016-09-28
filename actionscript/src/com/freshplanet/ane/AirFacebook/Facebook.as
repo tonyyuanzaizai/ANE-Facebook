@@ -21,9 +21,9 @@ public class Facebook extends EventDispatcher {
     private var _initialized:Boolean;
 
     // --------------------------------------------------------------------------------------//
-    //																						 //
-    // 									   PUBLIC API										 //
-    // 																						 //
+    //                                                                                         //
+    //                                        PUBLIC API                                         //
+    //                                                                                          //
     // --------------------------------------------------------------------------------------//
 
     /** Facebook is supported on iOS and Android devices. */
@@ -196,12 +196,12 @@ public class Facebook extends EventDispatcher {
     /**
      * Fetches any deferred applink data and attempts to open the returned url
      */
-//		public function openDeferredAppLink() : void
-//		{
-//			if (!isSupported) return;
+//        public function openDeferredAppLink() : void
+//        {
+//            if (!isSupported) return;
 //
-//			_context.call('openDeferredAppLink');
-//		}
+//            _context.call('openDeferredAppLink');
+//        }
 
     /**
      * The current Facebook access token, or null if no session is open.
@@ -440,9 +440,9 @@ public class Facebook extends EventDispatcher {
     }
 
     // --------------------------------------------------------------------------------------//
-    //																						 //
-    // 									 	PRIVATE API										 //
-    // 																						 //
+    //                                                                                         //
+    //                                          PRIVATE API                                         //
+    //                                                                                          //
     // --------------------------------------------------------------------------------------//
 
     private static const EXTENSION_ID:String = "com.freshplanet.AirFacebook";
@@ -523,8 +523,7 @@ public class Facebook extends EventDispatcher {
         var callbackName:String;
         var callback:Function;
         var status:String;
-
-		as3Log(JSON.stringify(event), "AS3.onStatus");
+        var hasUnknowStatus:Boolean = true;
         if (event.code.indexOf("SESSION") != -1) // If the event code contains SESSION, it's an open/reauthorize session result
         {
             var success:Boolean = (event.code.indexOf("SUCCESS") != -1);
@@ -535,7 +534,10 @@ public class Facebook extends EventDispatcher {
 
             _openSessionCallback = null;
 
-            if (callback != null) callback(success, userCancelled, error);
+            if (callback != null) {
+                hasUnknowStatus = false;
+                callback(success, userCancelled, error);
+            }
         }
         else if (event.code == "LOGGING") // Simple log message
         {
@@ -552,7 +554,7 @@ public class Facebook extends EventDispatcher {
                 delete _requestCallbacks[callbackName];
 
                 if (callback != null) {
-
+                    hasUnknowStatus = false;
                     callback(status == "SUCCESS", status == "CANCELLED", status == "ERROR" ? event.level : null);
                 }
             }
@@ -567,7 +569,7 @@ public class Facebook extends EventDispatcher {
                 delete _requestCallbacks[callbackName];
 
                 if (callback != null) {
-
+                    hasUnknowStatus = false;
                     callback(status == "SUCCESS", status == "CANCELLED", status == "ERROR" ? event.level : null);
                 }
             }
@@ -582,7 +584,7 @@ public class Facebook extends EventDispatcher {
                 delete _requestCallbacks[callbackName];
 
                 if (callback != null) {
-
+                    hasUnknowStatus = false;
                     callback(status == "SUCCESS", status == "CANCELLED", status == "ERROR" ? event.level : null);
                 }
             }
@@ -605,7 +607,7 @@ public class Facebook extends EventDispatcher {
                 delete _requestCallbacks[callbackName];
 
                 if(callback != null){
-
+                    hasUnknowStatus = false;
                     callback();
                 }
             }
@@ -623,12 +625,16 @@ public class Facebook extends EventDispatcher {
                     catch (e:Error) {
                         log("ERROR - " + e);
                     }
-
+                    hasUnknowStatus = false;
                     callback(data);
 
                     delete _requestCallbacks[event.code];
                 }
             }
+        }
+
+        if(hasUnknowStatus) {
+            as3Log(JSON.stringify(event), "AS3.onStatus-Unknow");
         }
     }
 
