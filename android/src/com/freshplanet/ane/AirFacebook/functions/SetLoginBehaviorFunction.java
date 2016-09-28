@@ -17,7 +17,8 @@ public class SetLoginBehaviorFunction implements FREFunction {
 
         Integer loginBehaviorInt = FREConversionUtil.toInt(args[0]);
         if(loginBehaviorInt != null) {
-            switch (loginBehaviorInt) {
+        	int loginBehaviorIntVal = loginBehaviorInt.intValue();
+            switch (loginBehaviorIntVal) {
                 case 0:
                     loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
                     break;
@@ -29,6 +30,7 @@ public class SetLoginBehaviorFunction implements FREFunction {
                     break;
                 default:
                     loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
+                    break;
             }
             AirFacebookExtension.context.setLoginBehavior(loginBehavior);
         }

@@ -131,10 +131,10 @@ public class FacebookObjectsConversionUtil {
         GameRequestContent.ActionType actionType = null;
         FREObject actionTypeObject = FREConversionUtil.getProperty("actionType", object);
         if(actionTypeObject != null) {
-
             Integer actionTypeInt = FREConversionUtil.toInt(FREConversionUtil.getProperty("value", actionTypeObject));
             if(actionTypeInt != null) {
-                switch (actionTypeInt) {
+            	int actionTypeIntVal = actionTypeInt.intValue();
+                switch (actionTypeIntVal) {
                     case 1:
                         actionType = GameRequestContent.ActionType.SEND;
                         break;
@@ -146,6 +146,7 @@ public class FacebookObjectsConversionUtil {
                         break;
                     default:
                         actionType = null;
+                        break;
                 }
             }
         }
@@ -155,10 +156,10 @@ public class FacebookObjectsConversionUtil {
         GameRequestContent.Filters filters = null;
         FREObject filtersObject = FREConversionUtil.getProperty("filters", object);
         if(filtersObject != null) {
-
             Integer filtersObjectInt = FREConversionUtil.toInt(FREConversionUtil.getProperty("value", filtersObject));
             if(filtersObjectInt != null) {
-                switch (filtersObjectInt) {
+            	int filtersObjectIntVal = filtersObjectInt.intValue();
+                switch (filtersObjectIntVal) {
                     case 1:
                         filters = GameRequestContent.Filters.APP_USERS;
                         break;
@@ -167,11 +168,16 @@ public class FacebookObjectsConversionUtil {
                         break;
                     default:
                         actionType = null;
+                        break;
                 }
             }
         }
 
-        List<String> suggestions = FREConversionUtil.toStringArray(FREConversionUtil.getProperty("suggestions", object));
+        List<String> suggestions = null;
+        FREObject suggestionsObject = FREConversionUtil.getProperty("suggestions", object);
+        if(suggestionsObject != null) {
+            suggestions = FREConversionUtil.toStringArray(suggestionsObject);
+        }
 
         if(message != null) builder.setMessage(message);
         if(to != null) builder.setRecipients(to);

@@ -17,7 +17,8 @@ public class SetDefaultShareDialogModeFunction implements FREFunction {
 
         Integer defaultShareDialogModeInt = FREConversionUtil.toInt(args[0]);
         if(defaultShareDialogModeInt != null) {
-            switch (defaultShareDialogModeInt) {
+        	int defaultShareDialogModeIntVal = defaultShareDialogModeInt.intValue();
+            switch (defaultShareDialogModeIntVal) {
                 case 0:
                     defaultShareDialogMode = ShareDialog.Mode.AUTOMATIC;
                     break;
@@ -32,6 +33,7 @@ public class SetDefaultShareDialogModeFunction implements FREFunction {
                     break;
                 default:
                     defaultShareDialogMode = ShareDialog.Mode.AUTOMATIC;
+                    break;
             }
             AirFacebookExtension.context.setDefaultShareDialogMode(defaultShareDialogMode);
         }

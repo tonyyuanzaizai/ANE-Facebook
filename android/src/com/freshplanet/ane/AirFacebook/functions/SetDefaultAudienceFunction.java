@@ -16,7 +16,8 @@ public class SetDefaultAudienceFunction implements FREFunction
 
 		Integer defaultAudienceInt = FREConversionUtil.toInt(args[0]);
 		if(defaultAudienceInt != null) {
-			switch (defaultAudienceInt) {
+			int defaultAudienceIntVal = defaultAudienceInt.intValue();
+			switch (defaultAudienceIntVal) {
 				case 0:
 					defaultAudience = DefaultAudience.FRIENDS;
 					break;
@@ -28,6 +29,7 @@ public class SetDefaultAudienceFunction implements FREFunction
 					break;
 				default:
 					defaultAudience = DefaultAudience.FRIENDS;
+					break;
 			}
 			AirFacebookExtension.context.setDefaultAudience(defaultAudience);
 		}
